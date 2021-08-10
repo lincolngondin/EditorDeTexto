@@ -6,13 +6,16 @@
 #include <SDL.h>
 
 namespace Render{
-	extern int comprimentoTela;
-	extern int alturaTela;
-	extern int comprimentoLetra;
-	extern int larguraLetra;
-	extern int espacoEntreLinhas;
 	
-	void renderEditor(const Window&, Editor&);
+	struct EditorRenderOptions{
+		int widthTela = 0;
+		int heightTela = 0;
+		int widthLetra = 0;
+		int heightLetra = 0;
+		int espacoEntreLinhas = 0;	
+	};
+	
+	void renderEditor(const Window&, Editor&, const EditorRenderOptions&);
 	void loadFont(const char*, const Window&);
 	void unloadFont();
 }

@@ -17,6 +17,7 @@ namespace App{
 	static void Run(){
 		bool running = true;
 		Editor editor;
+		Render::EditorRenderOptions opcoes = {500, 500, 7, 9, 2};
 		Window Janela("Lincoln's Editor - v0.01", 500, 500);
 		Render::loadFont("img/font.bmp", Janela);
 		SDL_Event e;
@@ -56,7 +57,7 @@ namespace App{
 					editor.next();
 				}
 			}
-			Render::renderEditor(Janela, editor);
+			Render::renderEditor(Janela, editor, opcoes);
 			
 			
 			SDL_Delay(1000/30);
