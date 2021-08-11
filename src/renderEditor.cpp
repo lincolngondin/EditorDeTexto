@@ -15,7 +15,8 @@ namespace Render{
 		
 		for(int i = 0; i < 1024; i++){
 				
-				int caractere = editor.getBuffer()[i];
+				//int caractere = editor.getBuffer()[i];
+				int caractere = 23;
 				
 				/*quebra de linha*/
 				if(quebrarLinha)
