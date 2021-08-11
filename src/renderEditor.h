@@ -12,6 +12,8 @@ namespace Render{
 		int heightTela = 0;
 		int widthLetra = 0;
 		int heightLetra = 0;
+		int offsetX = 0;
+		int offsetY = 0;
 		int espacoEntreLinhas = 0;	
 	};
 	
