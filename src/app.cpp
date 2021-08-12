@@ -43,7 +43,7 @@ namespace App{
 					else if(tecla == SDLK_LEFT){
 						editor.MoverParaEsquerda();
 					}
-					else if(tecla == SDLK_F1){
+					else if(tecla == SDLK_RETURN){
 						editor.NovaLinha();
 					}
 					else if(tecla == SDLK_F2){
@@ -52,6 +52,9 @@ namespace App{
 					else if(tecla == SDLK_RETURN){
 						//editor.getBuffer()[editor.getPos()] = 0x0a;
 						//editor.next();
+					}
+					else if(tecla == SDLK_BACKSPACE){
+						editor.ApagarLetra();
 					}
 				}
 				

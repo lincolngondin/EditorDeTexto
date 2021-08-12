@@ -13,7 +13,6 @@ Editor::~Editor(){
 		delete[] temp->data;
 		aux = temp->next;
 		delete temp;
-		puts("Deletado uma linha!");
 		if(aux == nullptr){
 			break;
 		}
@@ -22,27 +21,38 @@ Editor::~Editor(){
 }
 
 int Editor::NovaLinha(){
-	if(actualLine->next == nullptr){
-		actualLine->next = new linha;
-		actualLine->next->data = new char[lineSize];
-		for(int vat = 0; vat < lineSize; vat++) actualLine->next->data[vat] = 0;
-		actualLine->next->prev = actualLine;
-		actualLine = actualLine->next;
-		puts("Criado nova linha!");
+	//armazena o endereco da proxima linha ela existindo ou nao
+	linha *temp = actualLine->next;
+	//aloca a memoria necessaria da proxima linha
+	actualLine->next = new linha;
+	actualLine->next->data = new char[lineSize];
+	actualLine->next->prev = actualLine;
+	//a nova linha deve apontar para o que era a proxima linha anteriormente
+	actualLine->next->next = temp;
+	if(temp != nullptr) temp->prev = actualLine->next;
+	
+	actualLine = actualLine->next;
+	for(int vat = 0; vat < lineSize; vat++) actualLine->data[vat] = 0;
+	
+	char *a = actualLine->prev->data+position;
+	char *b = actualLine->data;
+	while(*a !=0){
+		*b = *a;
+		*a = 0;
+		a++;
+		b++;
 	}
-	else{
-		//armazena o endereco da proxima linha
-		linha *temp = actualLine->next;
-		//cria o que vai ser agora a proxima linha
-		actualLine->next = new linha;
-		actualLine->next->data = new char[lineSize];
-		for(int vat = 0; vat < lineSize; vat++) actualLine->next->data[vat] = 0;
-		actualLine->next->prev = actualLine;
-		//a nova linha deve aponta para o que era a proxima linha anteriormente
-		actualLine->next->next = temp;
-		temp->prev = actualLine->next;
-		actualLine = actualLine->next;
-		puts("Criado nova linha!");
-	}
+	position = 0;
 	return 0;
+}
+void Editor::ApagarLinha(){
+	if(actualLine->prev == nullptr) return;
+	
+	linha* temp = actualLine;
+	actualLine->prev->next = actualLine->next;
+	if(actualLine->next != nullptr) actualLine->next->prev = actualLine->prev;
+	actualLine = actualLine->prev;
+	
+	delete[] temp->data;
+	delete temp;
 }
