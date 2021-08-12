@@ -25,20 +25,28 @@ namespace App{
 		
 		while(running){
 			Janela.LimparTela();
+			if(SDL_GetTicks()%2==0)
+				editor.LogTree();
 			while(SDL_PollEvent(&e)){
 				
 				if(e.type == SDL_QUIT) running = false;
 				
 				if(e.type == SDL_KEYDOWN){
 					SDL_Keycode tecla = e.key.keysym.sym;
-					if(tecla == SDLK_RIGHT or tecla == SDLK_LEFT){
-						if(tecla == SDLK_RIGHT) editor.pularLinha();
-						if(tecla == SDLK_LEFT) editor.voltarLinha();
+					if(tecla == SDLK_DOWN) 
+						editor.pularLinha();
+					else if(tecla == SDLK_UP) 
+						editor.voltarLinha();
+					else if(tecla == SDLK_RIGHT){
+						editor.MoverParaDireita();
 					}
-					else if(tecla == SDLK_n){
+					else if(tecla == SDLK_LEFT){
+						editor.MoverParaEsquerda();
+					}
+					else if(tecla == SDLK_F1){
 						editor.NovaLinha();
 					}
-					else if(tecla == SDLK_l){
+					else if(tecla == SDLK_F2){
 						editor.LogTree();
 					}
 					else if(tecla == SDLK_RETURN){
@@ -48,6 +56,7 @@ namespace App{
 				}
 				
 				if(e.type == SDL_TEXTINPUT){
+					editor.AdicionarLetra(e.text.text[0]);
 					//editor.getBuffer()[editor.getPos()] = e.text.text[0];
 					//editor.next();
 				}

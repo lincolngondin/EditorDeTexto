@@ -1,8 +1,8 @@
 #include "editor.h"
-
 Editor::Editor(){
 	head = new linha;
 	head->data = new char[lineSize];
+	for(int vat = 0; vat < lineSize; vat++) head->data[vat] = 0;
 	actualLine = head;
 }
 Editor::~Editor(){
@@ -25,6 +25,7 @@ int Editor::NovaLinha(){
 	if(actualLine->next == nullptr){
 		actualLine->next = new linha;
 		actualLine->next->data = new char[lineSize];
+		for(int vat = 0; vat < lineSize; vat++) actualLine->next->data[vat] = 0;
 		actualLine->next->prev = actualLine;
 		actualLine = actualLine->next;
 		puts("Criado nova linha!");
@@ -35,6 +36,7 @@ int Editor::NovaLinha(){
 		//cria o que vai ser agora a proxima linha
 		actualLine->next = new linha;
 		actualLine->next->data = new char[lineSize];
+		for(int vat = 0; vat < lineSize; vat++) actualLine->next->data[vat] = 0;
 		actualLine->next->prev = actualLine;
 		//a nova linha deve aponta para o que era a proxima linha anteriormente
 		actualLine->next->next = temp;
