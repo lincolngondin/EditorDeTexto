@@ -1,0 +1,1 @@
+Um pequeno editor de texto escrito em c++ e usando a bibilioteca SDL2
