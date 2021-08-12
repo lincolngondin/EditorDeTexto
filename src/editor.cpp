@@ -56,3 +56,14 @@ void Editor::ApagarLinha(){
 	delete[] temp->data;
 	delete temp;
 }
+
+linha* Editor::GetHead() const {
+	return head;
+}
+
+int Editor::GetPos() const {
+	return position;
+}
+linha* Editor::GetActualLine() const {
+	return actualLine;
+}

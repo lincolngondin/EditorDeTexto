@@ -13,40 +13,32 @@ namespace Render{
 		dstRect.w = options.widthLetra;
 		dstRect.h = options.heightLetra;
 		
-		for(int i = 0; i < 1024; i++){
+		linha* linhas = editor.GetHead();
+		linha* linhaAtual = editor.GetActualLine();
+		char* letraNoMomento = nullptr;
+		int caractere = 0;
+		
+		while(linhas != nullptr){
+			letraNoMomento = linhas->data;
+			while(*letraNoMomento != 0){
+				caractere = *letraNoMomento;
+				srcRect.x = caractere*srcRect.w;
+				if(caractere != ' ') 
+					SDL_RenderCopy(janela.render, fonte_texture, &srcRect, &dstRect);
 				
-				//int caractere = editor.getBuffer()[i];
-				int caractere = 23;
-				
-				/*quebra de linha*/
-				if(quebrarLinha)
-					if((dstRect.x + options.offsetX) > (options.widthTela-options.widthLetra+options.offsetX)){
-						dstRect.y += options.heightLetra+options.espacoEntreLinhas;
-						dstRect.x = options.offsetX;
-					}
-				/*caractere return pula uma linha*/
-				if(caractere == 0x0a){
-					dstRect.y += options.heightLetra+options.espacoEntreLinhas;
-					dstRect.x = options.offsetX;
-				}
-					
-				else{
-					
-					if(caractere == ' ') dstRect.x += options.widthLetra;
-					else{
-						srcRect.x = caractere*srcRect.w;
-						SDL_RenderCopy(janela.render, fonte_texture, &srcRect, &dstRect);
-						dstRect.x += options.widthLetra;
-					}
-				}
+				dstRect.x += options.widthLetra;
+				letraNoMomento++;
 			}
+			if(linhas == linhaAtual){
+				SDL_SetRenderDrawColor(janela.render, 150, 0, 120, 1);
+				SDL_RenderDrawLine(janela.render, editor.GetPos()*dstRect.w+1, dstRect.y-2, editor.GetPos()*dstRect.w+1, dstRect.y+options.heightLetra+2);
+			}
+			dstRect.y += options.heightLetra+options.espacoEntreLinhas;
+			dstRect.x = options.offsetX;
+			
+			linhas = linhas->next;
+		}
 	}
-
-	
-
-
-
-
 
 	void loadFont(const char* filename, const Window& Janela){
 		SDL_Surface* surfc = SDL_LoadBMP(filename);

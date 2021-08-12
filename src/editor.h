@@ -20,6 +20,9 @@ class Editor{
 		Editor(const Editor& ) = delete;
 		Editor(const Editor&& ) = delete;
 	public:
+		linha* GetHead() const;
+		linha* GetActualLine() const;
+		int GetPos() const;
 		int NovaLinha();
 		void ApagarLinha();
 		void MoverParaDireita(){
@@ -54,18 +57,6 @@ class Editor{
 				if(temp < position ) position = temp;
 			}
 		};
-		void LogTree(){
-			linha *temp = head;
-			printf("Linhas (%i):\n---------------\n", position);
-			while(temp != nullptr){
-				if(temp == actualLine)
-					printf("*%x: %s\n", temp, temp->data);
-				else
-					printf(" %x: %s\n", temp, temp->data);
-				temp = temp->next;
-			}
-			printf("---------------\n");
-		}
 		void AdicionarLetra(char letra){
 			//capturo o endereco do caractere atual
 			char *a = actualLine->data+position;

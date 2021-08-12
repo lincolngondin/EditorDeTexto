@@ -1,7 +1,7 @@
 INCLUDE = "C:\Users\Lincoln\Desktop\SDL2-devel-2.0.12-mingw\SDL2-2.0.12\x86_64-w64-mingw32\include\SDL2"
 LIBS = "C:\Users\Lincoln\Desktop\SDL2-devel-2.0.12-mingw\SDL2-2.0.12\x86_64-w64-mingw32\lib"
 
-FLAGS = -O3 
+FLAGS = -O3 -Wall
 PROJETO=Editor
 
 all:$(PROJETO)
