@@ -37,7 +37,9 @@ namespace App{
 					}
 					else if(tecla == SDLK_n){
 						editor.NovaLinha();
-						
+					}
+					else if(tecla == SDLK_l){
+						editor.LogTree();
 					}
 					else if(tecla == SDLK_RETURN){
 						//editor.getBuffer()[editor.getPos()] = 0x0a;

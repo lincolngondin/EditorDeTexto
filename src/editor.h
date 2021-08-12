@@ -29,6 +29,18 @@ class Editor{
 			if(actualLine->prev != nullptr) actualLine = actualLine->prev;
 			puts("Voltou uma linha!");
 		};
+		void LogTree(){
+			linha *temp = head;
+			printf("Linhas:\n---------------\n");
+			while(temp != nullptr){
+				if(temp == actualLine)
+					printf("*%x\n", temp);
+				else
+					printf(" %x\n", temp);
+				temp = temp->next;
+			}
+			printf("---------------\n");
+		}
 };
 
 #endif
