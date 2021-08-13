@@ -1,6 +1,5 @@
 #include "app.h"
 #include "window.h"
-#include "editor.h"
 #include "renderEditor.h"
 #include <cstdio>
 
@@ -48,6 +47,9 @@ namespace App{
 					else if(tecla == SDLK_BACKSPACE){
 						editor.ApagarLetra();
 					}
+					else if(tecla == SDLK_LCTRL){
+						SalvarArquivo("teste.cpp", "\r\n",editor);
+					}
 				}
 				
 				if(e.type == SDL_TEXTINPUT) editor.AdicionarLetra(e.text.text[0]);
@@ -61,5 +63,16 @@ namespace App{
 		Render::unloadFont();
 	}
 	
-
+	bool SalvarArquivo(const char* file_name, const char* EOL, const Editor& editor){
+		FILE *file = fopen(file_name, "wb");
+		linha *Linha = editor.GetHead();
+		while(Linha!=nullptr){
+			fprintf(file, "%s", Linha->data);
+			fprintf(file, EOL);
+			Linha = Linha->next;
+		}
+		fclose(file);
+		return true;
+	}
+	
 }

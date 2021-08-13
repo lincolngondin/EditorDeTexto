@@ -1,7 +1,6 @@
 #ifndef _EDITOR_H_
 #define _EDITOR_H_
 
-#include <cstdio>
 struct linha{
 	char* data = nullptr;
 	linha* prev = nullptr;
