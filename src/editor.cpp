@@ -1,4 +1,6 @@
 #include "editor.h"
+#include <cstdio>
+
 Editor::Editor(){
 	head = new linha;
 	head->data = new char[lineSize];
@@ -18,6 +20,36 @@ Editor::~Editor(){
 		}
 		temp = aux;
 	}
+}
+
+bool Editor::CarregarArquivo(const char* file){
+	FILE *arquivo = fopen(file, "rb");
+	if(arquivo == nullptr) return false;
+	linha *line = head;
+	char c;
+	int pos = 0;
+	while(true){
+		c = fgetc(arquivo);
+		if(c==EOF) break;
+		
+		if(c == '\r' or c == '\n'){
+			c = fgetc(arquivo);
+			if( c == '\n') c = fgetc(arquivo);
+			if(line->next == nullptr){
+				line->next = new linha;
+				line->next->prev = line;
+				line->next->data = new char[lineSize];
+				for(int vat = 0; vat < lineSize; vat++) line->next->data[vat] = 0;
+			}
+			line = line->next;
+			pos = 0;
+		}
+		line->data[pos] = c;
+		pos++;
+	}
+	
+	fclose(arquivo);
+	return true;
 }
 
 int Editor::NovaLinha(){

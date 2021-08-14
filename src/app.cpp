@@ -50,6 +50,9 @@ namespace App{
 					else if(tecla == SDLK_LCTRL){
 						SalvarArquivo("teste.cpp", "\r\n",editor);
 					}
+					else if(tecla == SDLK_RCTRL){
+						editor.CarregarArquivo("texto.txt");
+					}
 				}
 				
 				if(e.type == SDL_TEXTINPUT) editor.AdicionarLetra(e.text.text[0]);

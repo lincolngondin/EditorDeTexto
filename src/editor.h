@@ -23,6 +23,7 @@ class Editor{
 		linha* GetActualLine() const;
 		int GetPos() const;
 		int NovaLinha();
+		bool CarregarArquivo(const char*);
 		void ApagarLinha();
 		void MoverParaDireita(){
 			if(actualLine->data[position] != 0) position++;
